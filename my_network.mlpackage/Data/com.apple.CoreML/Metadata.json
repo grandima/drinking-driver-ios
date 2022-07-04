@@ -1,0 +1,7 @@
+{
+  "MLModelCreatorDefinedKey" : {
+    "input_1" : "Input image to be classified",
+    "com.github.apple.coremltools.source" : "onnx==1.12.0",
+    "com.github.apple.coremltools.version" : "5.2.0"
+  }
+}
