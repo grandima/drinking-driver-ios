@@ -22,7 +22,7 @@ import coremltools as ct
 model = models.resnet50()
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 10)
-model.load_state_dict(torch.load("/Users/grandima/Desktop/Local/Personal/Observantai/model-driver", map_location=torch.device('cpu')))
+model.load_state_dict(torch.load("./model-driver", map_location=torch.device('cpu')))
 model = torch.nn.Sequential(model, torch.nn.Softmax(dim=1))
 model.eval()
 model.cpu()
@@ -70,11 +70,11 @@ cml_model = ct.convert(traced_model,
                                             ],
                         classifier_config=classifier_config,
 )
-cml_model.save('./OldModel.mlpackage')
+cml_model.save('./BreakfastFinder/OldModel.mlpackage')
 
 
-model = ct.models.MLModel("./OldModel.mlpackage") 
-spec = ct.utils.load_spec("./OldModel.mlpackage")
+model = ct.models.MLModel("./BreakfastFinder/OldModel.mlpackage") 
+spec = ct.utils.load_spec("./BreakfastFinder/OldModel.mlpackage")
 
 input = spec.description.input[0]
 
@@ -86,7 +86,7 @@ input.type.imageType.width = 400
 ct.utils.save_spec(spec, "./OldModel.mlpackage")
 
 input_shape = (3, 400, 400)
-img = PIL.Image.open('./img_29.jpg').resize(input_shape[1:])
+img = PIL.Image.open('./img_29.jpg')#.resize(input_shape[1:])
 
 proba = model.predict({"input_1": img})['var_805']
 proba = [round(float(elem),4) for elem in proba[0]]
