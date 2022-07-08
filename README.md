@@ -5,7 +5,7 @@ https://developer.apple.com/documentation/vision/recognizing_objects_in_live_cap
 2. drinking driver ML model taken from here:
 https://www.kaggle.com/code/longvan92/using-resnet-99-success-rate-on-validation-test
 
-During an implementation, I didn't care about architecture, forced unwraps, and other programming stuff. My goal was to achieve the result in a time-constained situation.
+During an implementation, I didn't care about architecture, forc unwraps, coding optimization and other programming stuff. My goal was to achieve the result in a time-constained situation.
 
 Implementation flow:
 1. Check what Apple offers for this task
