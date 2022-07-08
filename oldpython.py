@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import pandas as pd
-import PIL.Image as PILImage
+import PIL.Image
 from IPython.display import Image
 from sklearn.metrics import confusion_matrix
 
@@ -17,58 +17,77 @@ import torch.nn as nn
 import torchvision
 from torchvision import models,transforms,datasets
 
-model = models.resnet50(pretrained=True)
+import coremltools as ct
+
+model = models.resnet50()
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 10)
-model.load_state_dict(torch.load("/Users/grandima/Desktop/Local/Personal/Observantai/kaggle/working/model-driver", map_location=torch.device('cpu')))
+model.load_state_dict(torch.load("/Users/grandima/Desktop/Local/Personal/Observantai/model-driver", map_location=torch.device('cpu')))
+model = torch.nn.Sequential(model, torch.nn.Softmax(dim=1))
 model.eval()
 model.cpu()
-dummy_input = torch.rand(1, 3, 32, 32)
 
-# Define input / output names
-input_names = ["my_input"]
-output_names = ["my_output"]
+class_dict = {0 : "safe driving",
+              1 : "texting - right",
+              2 : "talking on the phone - right",
+              3 : "texting - left",
+              4 : "talking on the phone - left",
+              5 : "operating the radio",
+              6 : "drinking",
+              7 : "reaching behind",
+              8 : "hair and makeup",
+              9 : "talking to passenger"}
+class_list = [(k, v) for k, v in class_dict.items()]
+sorted(class_list, key=lambda x: x[0])
+class_list = [i[1] for i in class_list]
 
-# Convert the PyTorch model to ONNX
-torch.onnx.export(model,
-                  dummy_input,
-                  "my_network.onnx",
-                  verbose=True,
-                  input_names=input_names,
-                  output_names=output_names)
-                  
-from onnx_coreml import convert
-model = convert(model='my_network.onnx')
+preprocess = transforms.Compose([
+    
+    transforms.ToTensor(),
+    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    ])
 
-# Save the CoreML model
-model.save('my_network.mlmodel')
+input_shape = (3, 400, 400)
+
+img = PIL.Image.open('./img_29.jpg').resize(input_shape[1:])
+
+input_tensor = preprocess(img)
+input_batch = input_tensor.unsqueeze(0)
+out = model(input_batch.cpu())
+# proba = nn.Softmax(dim=1)(out)
+proba = out
+proba = [round(float(elem),4) for elem in proba[0]]
+print(proba)
+
+example_input = torch.rand(1, *input_shape)
+traced_model = torch.jit.trace(model, example_input)
+
+classifier_config = ct.ClassifierConfig(class_list)
+cml_model = ct.convert(traced_model,
+                       inputs=[ct.ImageType(color_layout='RGB', scale=1/(0.5*255.0),
+                                            bias=[-1, -1, -1],
+                                            shape=example_input.shape)
+                                            ],
+                        classifier_config=classifier_config,
+)
+cml_model.save('./OldModel.mlpackage')
 
 
-path_test = "/Users/grandima/Desktop/Local/Personal/Observantai/kaggle/input/state-farm-distracted-driver-detection/imgs"
-transform = transforms.Compose([transforms.Resize((400, 400)),
-                                 transforms.RandomRotation(10),
-                                 transforms.ToTensor()])
-data = datasets.ImageFolder(root = path_test, transform = transform)
+model = ct.models.MLModel("./OldModel.mlpackage") 
+spec = ct.utils.load_spec("./OldModel.mlpackage")
 
-# torch.save(model.state_dict(), 'model_scripted.pt')
-# model = models.resnet50(pretrained=True)
-# num_ftrs = model.fc.in_features
-# model.fc = nn.Linear(num_ftrs, 10)
-# model.load_state_dict(torch.load("/Users/grandima/Desktop/Local/Personal/Observantai/model_scripted.pt", map_location=torch.device('cpu')))
-# model.eval()
-# model.cpu()
-# model_scripted = torch.jit.script(model) # Export to TorchScript
-# model_scripted.save('model_scripted.pt') # Save
+input = spec.description.input[0]
 
+import coremltools.proto.FeatureTypes_pb2 as ft 
 
-# img,c = data[0]
-# import coremltools as ct
-# scale = 1/(0.226*255.0)
-# bias = [-0.485/(0.229), -0.456/(0.224), -0.406/(0.225)]
-# input = ct.ImageType(
-#     shape=img.shape,
-#     bias=bias
-# )
+input.type.imageType.colorSpace = ft.ImageFeatureType.RGB
+input.type.imageType.height = 400
+input.type.imageType.width = 400
+ct.utils.save_spec(spec, "./OldModel.mlpackage")
 
-# model2 = ct.convert('/Users/grandima/Desktop/Local/Personal/Observantai/model_scripted.pt',  inputs=[input])
-# mode2.save("model-driver.mlmodel")
+input_shape = (3, 400, 400)
+img = PIL.Image.open('./img_29.jpg').resize(input_shape[1:])
+
+proba = model.predict({"input_1": img})['var_805']
+proba = [round(float(elem),4) for elem in proba[0]]
+print(proba)
