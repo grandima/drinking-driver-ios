@@ -24,7 +24,7 @@
 		E3CB966204CD821C6969C2A3 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		FA4750C920BF3F48003E19ED /* Breakfast Finder Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Breakfast Finder Logo.png"; sourceTree = SOURCE_ROOT; };
 		FAB417F52099308400494E9C /* VisionObjectRecognitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionObjectRecognitionViewController.swift; sourceTree = "<group>"; };
-		FAD5009B1ED668B60074D713 /* BreakfastFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakfastFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAD5009B1ED668B60074D713 /* drinking-driver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "drinking-driver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD5009E1ED668B60074D713 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD500A01ED668B60074D713 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FAD500A31ED668B60074D713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				C2A2AB60C2A2AB2000000001 /* README.md */,
-				FAD5009D1ED668B60074D713 /* BreakfastFinder */,
+				FAD5009D1ED668B60074D713 /* drinking-driver */,
 				FAD5009C1ED668B60074D713 /* Products */,
 				FA86553BE8674B6BE41BAA64 /* Configuration */,
 				6699E7B5AD92619B7FE916AC /* LICENSE */,
@@ -74,12 +74,12 @@
 		FAD5009C1ED668B60074D713 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FAD5009B1ED668B60074D713 /* BreakfastFinder.app */,
+				FAD5009B1ED668B60074D713 /* drinking-driver.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FAD5009D1ED668B60074D713 /* BreakfastFinder */ = {
+		FAD5009D1ED668B60074D713 /* drinking-driver */ = {
 			isa = PBXGroup;
 			children = (
 				FAD5009E1ED668B60074D713 /* AppDelegate.swift */,
@@ -92,15 +92,15 @@
 				FA4750C920BF3F48003E19ED /* Breakfast Finder Logo.png */,
 				FAD500AA1ED668B60074D713 /* Info.plist */,
 			);
-			path = BreakfastFinder;
+			path = "drinking-driver";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FAD5009A1ED668B60074D713 /* BreakfastFinder */ = {
+		FAD5009A1ED668B60074D713 /* drinking-driver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAD500AD1ED668B60074D713 /* Build configuration list for PBXNativeTarget "BreakfastFinder" */;
+			buildConfigurationList = FAD500AD1ED668B60074D713 /* Build configuration list for PBXNativeTarget "drinking-driver" */;
 			buildPhases = (
 				FAD500971ED668B60074D713 /* Sources */,
 				FAD500981ED668B60074D713 /* Frameworks */,
@@ -110,9 +110,9 @@
 			);
 			dependencies = (
 			);
-			name = BreakfastFinder;
+			name = "drinking-driver";
 			productName = "VisionCamObjectRecognition-Swift";
-			productReference = FAD5009B1ED668B60074D713 /* BreakfastFinder.app */;
+			productReference = FAD5009B1ED668B60074D713 /* drinking-driver.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -132,7 +132,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FAD500961ED668B60074D713 /* Build configuration list for PBXProject "BreakfastFinder" */;
+			buildConfigurationList = FAD500961ED668B60074D713 /* Build configuration list for PBXProject "drinking-driver" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -145,7 +145,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FAD5009A1ED668B60074D713 /* BreakfastFinder */,
+				FAD5009A1ED668B60074D713 /* drinking-driver */,
 			);
 		};
 /* End PBXProject section */
@@ -324,10 +324,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COREML_CODEGEN_LANGUAGE = Automatic;
 				DEVELOPMENT_TEAM = DQUP2N63KG;
-				INFOPLIST_FILE = BreakfastFinder/Info.plist;
+				INFOPLIST_FILE = "drinking-driver/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.BreakfastFinder${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.drinking-driver--SAMPLE-CODE-DISAMBIGUATOR-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -343,11 +343,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COREML_CODEGEN_LANGUAGE = Automatic;
-				DEVELOPMENT_TEAM = DQUP2N63KG;
-				INFOPLIST_FILE = BreakfastFinder/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "drinking-driver/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.BreakfastFinder${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.drinking-driver--SAMPLE-CODE-DISAMBIGUATOR-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -358,7 +358,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FAD500961ED668B60074D713 /* Build configuration list for PBXProject "BreakfastFinder" */ = {
+		FAD500961ED668B60074D713 /* Build configuration list for PBXProject "drinking-driver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAD500AB1ED668B60074D713 /* Debug */,
@@ -367,7 +367,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAD500AD1ED668B60074D713 /* Build configuration list for PBXNativeTarget "BreakfastFinder" */ = {
+		FAD500AD1ED668B60074D713 /* Build configuration list for PBXNativeTarget "drinking-driver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAD500AE1ED668B60074D713 /* Debug */,
