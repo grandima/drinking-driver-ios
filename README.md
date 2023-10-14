@@ -16,7 +16,7 @@ Implementation flow:
 
 How to use:
 1. Run on: Xcode 13.4, iPhone iOS 15.5
-2. open `BreakfastFinder.xcodeproj`
+2. open `drinking-driver-ios.xcodeproj`
 3. change team
 4. Run on iPhone
 5. put your iPhone into "landscape left" position
